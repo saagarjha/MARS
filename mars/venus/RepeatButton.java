@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.event.*;
- 
+
 /////////////////////////////  CREDIT  /////////////////////////////////////
 // http://forums.sun.com/thread.jspa?threadID=499183&messageID=2505646
 // bsampieri, 4 March 2004
@@ -12,9 +12,9 @@ import javax.swing.event.*;
 // Adopted/adapted by DPS 20 July 2008
 //
 // This is NOT one of the MARS buttons!  It is a subclass of JButton that can
-// be used to create buttons that fire events after being held down for a 
-// specified period of time and at a specified rate. 
- 
+// be used to create buttons that fire events after being held down for a
+// specified period of time and at a specified rate.
+
 /**
  * <code>RepeatButton</code> is a <code>JButton</code> which contains a timer 
  * for firing events while the button is held down.  There is a default 
@@ -33,40 +33,37 @@ import javax.swing.event.*;
  * firing anyway, except to process all ActionListeners internally.  But 
  * realistically, it probably doesn't matter.  
  */
-public class RepeatButton extends JButton 
-		implements ActionListener, MouseListener {
+public class RepeatButton extends JButton
+    implements ActionListener, MouseListener {
 	/**
 	 * The pressed state for this button.
 	 */
 	private boolean pressed = false;
- 
+
 	/**
 	 * Flag to indicate that the button should fire events when held.  
 	 * If false, the button is effectively a plain old JButton, but 
 	 * there may be times when this feature might wish to be disabled.  
 	 */
 	private boolean repeatEnabled = true;
- 
+
 	/**
 	 * The hold-down timer for this button.
 	 */
 	private Timer timer = null;
- 
 
 	/**
 	 * The initial delay for this button.  Hold-down time before first
 	 * timer firing.  In milliseconds.
 	 */
 	private int initialDelay = 300;
-	
+
 	/**
 	 * The delay between timer firings for this button once the delay
 	 * period is past. In milliseconds.
 	 */
 	private int delay = 60;
- 
 
- 
 	/**
 	 * Holder of the modifiers used when the mouse pressed the button.  
 	 * This is used for subsequently fired action events.  This may change 
@@ -74,7 +71,7 @@ public class RepeatButton extends JButton
 	 * and then moves the mouse back in.  
 	 */
 	private int modifiers = 0;
- 
+
 	/**
 	 * Creates a button with no set text or icon.
 	 */
@@ -82,7 +79,7 @@ public class RepeatButton extends JButton
 		super();
 		init();
 	}
- 
+
 	/**
 	 * Creates a button where properties are taken from the Action supplied.
 	 * 
@@ -92,7 +89,7 @@ public class RepeatButton extends JButton
 		super(a);
 		init();
 	}
- 
+
 	/**
 	 * Creates a button with an icon.
 	 * 
@@ -102,7 +99,7 @@ public class RepeatButton extends JButton
 		super(icon);
 		init();
 	}
- 
+
 	/**
 	 * Creates a button with text.
 	 * 
@@ -112,7 +109,7 @@ public class RepeatButton extends JButton
 		super(text);
 		init();
 	}
- 
+
 	/**
 	 * Creates a button with initial text and an icon.
 	 * 
@@ -123,7 +120,7 @@ public class RepeatButton extends JButton
 		super(text, icon);
 		init();
 	}
- 
+
 	/**
 	 * Initializes the button.
 	 */
@@ -133,7 +130,7 @@ public class RepeatButton extends JButton
 		this.timer = new Timer(this.delay, this);
 		this.timer.setRepeats(true);
 	}
- 
+
 	/**
 	 * Gets the delay for the timer of this button.  
 	 * 
@@ -142,7 +139,7 @@ public class RepeatButton extends JButton
 	public int getDelay() {
 		return this.delay;
 	}
- 
+
 	/**
 	 * Set the delay for the timer of this button.  
 	 * 
@@ -151,7 +148,7 @@ public class RepeatButton extends JButton
 	public void setDelay(int d) {
 		this.delay = d;
 	}
- 
+
 	/**
 	 * Gets the initial delay for the timer of this button.  
 	 * 
@@ -160,7 +157,7 @@ public class RepeatButton extends JButton
 	public int getInitialDelay() {
 		return this.initialDelay;
 	}
- 
+
 	/**
 	 * Sets the initial delay for the timer of this button.  
 	 * 
@@ -169,7 +166,7 @@ public class RepeatButton extends JButton
 	public void setInitialDelay(int d) {
 		this.initialDelay = d;
 	}
- 
+
 	/**
 	 * Checks if the button should fire events when held.  If false, the 
 	 * button is effectively a plain old JButton, but there may be times 
@@ -180,7 +177,7 @@ public class RepeatButton extends JButton
 	public boolean isRepeatEnabled() {
 		return this.repeatEnabled;
 	}
- 
+
 	/**
 	 * Sets if the button should fire events when held.  If false, the 
 	 * button is effectively a plain old JButton, but there may be times 
@@ -190,15 +187,15 @@ public class RepeatButton extends JButton
 	 * @param  en  if true, the button should fire events when held
 	 */
 	public void setRepeatEnabled(boolean en) {
-		if(!en) {
+		if (!en) {
 			this.pressed = false;
-			if(timer.isRunning()) {
+			if (timer.isRunning()) {
 				timer.stop();
 			}
 		}
 		this.repeatEnabled = en;
 	}
- 
+
 	/**
 	 * Sets the enabled state of this button.  Overridden to stop the timer 
 	 * if it's running.
@@ -206,15 +203,15 @@ public class RepeatButton extends JButton
 	 * @param  en  if true, enables the button
 	 */
 	public void setEnabled(boolean en) {
-		if(en != super.isEnabled()) {
+		if (en != super.isEnabled()) {
 			this.pressed = false;
-			if(timer.isRunning()) {
+			if (timer.isRunning()) {
 				timer.stop();
 			}
 		}
 		super.setEnabled(en);
 	}
- 
+
 	/**
 	 * Handle action events. OVERRIDE THIS IN SUBCLASS!
 	 *
@@ -222,18 +219,18 @@ public class RepeatButton extends JButton
 	 */
 	public void actionPerformed(ActionEvent ae) {
 		// process events only from this components
-		if(ae.getSource() == this.timer) {
+		if (ae.getSource() == this.timer) {
 			ActionEvent event = new ActionEvent(
-				this, ActionEvent.ACTION_PERFORMED, 
-				super.getActionCommand(), this.modifiers);
-			super.fireActionPerformed(event); 
+			    this, ActionEvent.ACTION_PERFORMED,
+			    super.getActionCommand(), this.modifiers);
+			super.fireActionPerformed(event);
 		}
 		// testing code...
-		else if(testing && ae.getSource() == this) {
+		else if (testing && ae.getSource() == this) {
 			System.out.println(ae.getActionCommand());
 		}
 	}
- 
+
 	/**
 	 * Handle mouse clicked events.
 	 *
@@ -241,14 +238,14 @@ public class RepeatButton extends JButton
 	 */
 	public void mouseClicked(MouseEvent me) {
 		// process events only from this components
-		if(me.getSource() == this) {
+		if (me.getSource() == this) {
 			this.pressed = false;
-			if(this.timer.isRunning()) {
+			if (this.timer.isRunning()) {
 				this.timer.stop();
 			}
 		}
 	}
- 
+
 	/**
 	 * Handle mouse pressed events.
 	 *
@@ -256,16 +253,16 @@ public class RepeatButton extends JButton
 	 */
 	public void mousePressed(MouseEvent me) {
 		// process events only from this components
-		if(me.getSource() == this && this.isEnabled() && this.isRepeatEnabled()) {
+		if (me.getSource() == this && this.isEnabled() && this.isRepeatEnabled()) {
 			this.pressed = true;
-			if(!this.timer.isRunning()) {
+			if (!this.timer.isRunning()) {
 				this.modifiers = me.getModifiers();
 				this.timer.setInitialDelay(this.initialDelay);
 				this.timer.start();
 			}
 		}
 	}
- 
+
 	/**
 	 * Handle mouse released events.
 	 *
@@ -273,14 +270,14 @@ public class RepeatButton extends JButton
 	 */
 	public void mouseReleased(MouseEvent me) {
 		// process events only from this components
-		if(me.getSource() == this) {
+		if (me.getSource() == this) {
 			this.pressed = false;
-			if(this.timer.isRunning()) {
+			if (this.timer.isRunning()) {
 				this.timer.stop();
 			}
 		}
 	}
- 
+
 	/**
 	 * Handle mouse entered events.
 	 *
@@ -288,15 +285,15 @@ public class RepeatButton extends JButton
 	 */
 	public void mouseEntered(MouseEvent me) {
 		// process events only from this components
-		if(me.getSource() == this && this.isEnabled() && this.isRepeatEnabled()) {
-			if(this.pressed && !this.timer.isRunning()) {
+		if (me.getSource() == this && this.isEnabled() && this.isRepeatEnabled()) {
+			if (this.pressed && !this.timer.isRunning()) {
 				this.modifiers = me.getModifiers();
 				this.timer.setInitialDelay(this.delay);
 				this.timer.start();
 			}
 		}
 	}
- 
+
 	/**
 	 * Handle mouse exited events.
 	 *
@@ -304,18 +301,18 @@ public class RepeatButton extends JButton
 	 */
 	public void mouseExited(MouseEvent me) {
 		// process events only from this components
-		if(me.getSource() == this) {
-			if(this.timer.isRunning()) {
+		if (me.getSource() == this) {
+			if (this.timer.isRunning()) {
 				this.timer.stop();
 			}
 		}
 	}
- 
+
 	/**
 	 * Testing flag.  Set in main method.
 	 */
 	private static boolean testing = false;
- 
+
 	/**
 	 * Main method, for testing.  Creates a frame with both styles of menu.
 	 *
@@ -325,7 +322,7 @@ public class RepeatButton extends JButton
 		testing = true;
 		JFrame f = new JFrame("RepeatButton Test");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
+
 		JPanel p = new JPanel();
 		RepeatButton b = new RepeatButton("hold me");
 		b.setActionCommand("test");

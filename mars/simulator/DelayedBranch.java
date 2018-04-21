@@ -60,16 +60,16 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  **/
 
 public class DelayedBranch {
-   // Class states.
-   private static final int CLEARED    = 0;
+	// Class states.
+	private static final int CLEARED = 0;
 	private static final int REGISTERED = 1;
-	private static final int TRIGGERED  = 2;
+	private static final int TRIGGERED = 2;
 
-   // Initially nothing is happening.
-	
+	// Initially nothing is happening.
+
 	private static int state = CLEARED;
 	private static int branchTargetAddress = 0;
-	
+
 	/**
     *  Register the fact that a successful branch is to occur.  This is called in
 	 *  the instruction's simulated execution (its simulate() method in InstructionSet).
@@ -82,12 +82,14 @@ public class DelayedBranch {
 	 *  @param targetAddress The address to branch to after executing the next instruction
 	 */
 	public static void register(int targetAddress) {
-	  // About as clean as a switch statement can be!
-	  switch (state) {
-	    case CLEARED    :  branchTargetAddress = targetAddress;
-		 case REGISTERED :
-		 case TRIGGERED  :  state = REGISTERED;
-	  }          
+		// About as clean as a switch statement can be!
+		switch (state) {
+		case CLEARED:
+			branchTargetAddress = targetAddress;
+		case REGISTERED:
+		case TRIGGERED:
+			state = REGISTERED;
+		}
 	}
 
 	/**
@@ -102,25 +104,26 @@ public class DelayedBranch {
 	 *  Postcondition: DelayedBranch.isTriggered() && !DelayedBranch.isRegistered()
 	 *
 	 */
-	 static void trigger() {
-	  // About as clean as a switch statement can be!
-	  switch (state) {
-		 case REGISTERED :
-		 case TRIGGERED  :  state = TRIGGERED;
-		 case CLEARED    :
-	  }          
+	static void trigger() {
+		// About as clean as a switch statement can be!
+		switch (state) {
+		case REGISTERED:
+		case TRIGGERED:
+			state = TRIGGERED;
+		case CLEARED:
+		}
 	}
 
 	/**
     *  Clear the delayed branch. This must be done immediately after setting the
 	 *  program counter to the target address.  This method has package visibility.
 	 */
-	 static void clear() {
-	  state = CLEARED;
-	  branchTargetAddress = 0; 
+	static void clear() {
+		state = CLEARED;
+		branchTargetAddress = 0;
 	}
 
-   /**
+	/**
 	 *  Return registration status.  Is false initially, true after register() is called
 	 *  but becomes false after trigger() or clear() are called.  This method has package
 	 *  visibility.
@@ -128,23 +131,22 @@ public class DelayedBranch {
 	 *  @return true if branch is registered but not triggered, false otherwise.
 	 */
 
-    static boolean isRegistered() {
-	   return state == REGISTERED;
+	static boolean isRegistered() {
+		return state == REGISTERED;
 	}
-	
-   /**
+
+	/**
 	 *  Return trigger status.  Is false initially, true after trigger() is called
 	 *  but becomes false after clear() is called.  This method has package visibility.
     *
     *  @return true if branch is registered but not triggered, false otherwise.
 	 */
 
-   static boolean isTriggered() {
-	   return state == TRIGGERED;
-	}	
+	static boolean isTriggered() {
+		return state == TRIGGERED;
+	}
 
-
-  /**
+	/**
    *  Return branch target address.  This should be retrieved only to set the program
 	*  counter at the end of the delay slot.  This method has package visibility.
 	*
@@ -152,8 +154,8 @@ public class DelayedBranch {
 	*
 	*  @return Target address of the delayed branch.
 	*/
-	 static int getBranchTargetAddress() {
-	    return branchTargetAddress;
+	static int getBranchTargetAddress() {
+		return branchTargetAddress;
 	}
-	
-}  // DelayedBranch
+
+} // DelayedBranch

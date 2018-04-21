@@ -1,10 +1,9 @@
-   package mars.mips.instructions.syscalls;
-	
-   import mars.util.*;
-   import mars.mips.hardware.*;
-   import mars.simulator.*;
-   import mars.*;
+package mars.mips.instructions.syscalls;
 
+import mars.util.*;
+import mars.mips.hardware.*;
+import mars.simulator.*;
+import mars.*;
 
 /*
 Copyright (c) 2003-2009,  Pete Sanderson and Kenneth Vollmar
@@ -39,22 +38,22 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * immediately upon generating the tone.  By contrast, syscall 33
  * (MidiOutSync) does not return until tone duration has elapsed.
  */
-    public class SyscallMidiOut extends AbstractSyscall {
-    
-    // Endpoints of ranges for the three "byte" parameters.  The duration
-    // parameter is limited at the high end only by the int range.
-      static final int rangeLowEnd = 0;
-      static final int rangeHighEnd = 127;
-    
-   /**
+public class SyscallMidiOut extends AbstractSyscall {
+
+	// Endpoints of ranges for the three "byte" parameters.  The duration
+	// parameter is limited at the high end only by the int range.
+	static final int rangeLowEnd = 0;
+	static final int rangeHighEnd = 127;
+
+	/**
     * Build an instance of the MIDI (simulated) out syscall.  Default service number
     * is 31 and name is "MidiOut".
     */
-       public SyscallMidiOut() {
-         super(31, "MidiOut");
-      }
-      
-   /**
+	public SyscallMidiOut() {
+		super(31, "MidiOut");
+	}
+
+	/**
    * Performs syscall function to send MIDI output to sound card.  This requires
    * four arguments in registers $a0 through $a3.<br>
    * $a0 - pitch (note).  Integer value from 0 to 127, with 60 being middle-C on a piano.<br>
@@ -67,17 +66,19 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    * instrument and volume value ranges 0-127 are from javax.sound.midi; actual MIDI instruments
    * use the range 1-128.
    */
-       public void simulate(ProgramStatement statement) throws ProcessingException {
-         int pitch      = RegisterFile.getValue(4); // $a0
-         int duration   = RegisterFile.getValue(5); // $a1
-         int instrument = RegisterFile.getValue(6); // $a2
-         int volume     = RegisterFile.getValue(7); // $a3
-         if (pitch < rangeLowEnd || pitch > rangeHighEnd) pitch = ToneGenerator.DEFAULT_PITCH;
-         if (duration < 0) duration = ToneGenerator.DEFAULT_DURATION;
-         if (instrument < rangeLowEnd || instrument > rangeHighEnd) instrument = ToneGenerator.DEFAULT_INSTRUMENT;
-         if (volume < rangeLowEnd || volume > rangeHighEnd) volume = ToneGenerator.DEFAULT_VOLUME;
-         new ToneGenerator().generateTone( (byte) pitch, duration, (byte) instrument, (byte) volume);
-      }
-
-   }
-	
+	public void simulate(ProgramStatement statement) throws ProcessingException {
+		int pitch = RegisterFile.getValue(4);      // $a0
+		int duration = RegisterFile.getValue(5);   // $a1
+		int instrument = RegisterFile.getValue(6); // $a2
+		int volume = RegisterFile.getValue(7);     // $a3
+		if (pitch < rangeLowEnd || pitch > rangeHighEnd)
+			pitch = ToneGenerator.DEFAULT_PITCH;
+		if (duration < 0)
+			duration = ToneGenerator.DEFAULT_DURATION;
+		if (instrument < rangeLowEnd || instrument > rangeHighEnd)
+			instrument = ToneGenerator.DEFAULT_INSTRUMENT;
+		if (volume < rangeLowEnd || volume > rangeHighEnd)
+			volume = ToneGenerator.DEFAULT_VOLUME;
+		new ToneGenerator().generateTone((byte)pitch, duration, (byte)instrument, (byte)volume);
+	}
+}

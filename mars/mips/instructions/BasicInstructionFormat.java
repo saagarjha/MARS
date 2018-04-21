@@ -40,12 +40,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @version August 2003
  */
 public class BasicInstructionFormat {
-    public static final BasicInstructionFormat R_FORMAT = new BasicInstructionFormat();
-    public static final BasicInstructionFormat I_FORMAT = new BasicInstructionFormat();
-    public static final BasicInstructionFormat I_BRANCH_FORMAT = new BasicInstructionFormat();
-    public static final BasicInstructionFormat J_FORMAT = new BasicInstructionFormat();
-    
-    // private default constructor prevents objects of this class other than those above.
-    private BasicInstructionFormat() {
-    }
+	public static final BasicInstructionFormat R_FORMAT = new BasicInstructionFormat();
+	public static final BasicInstructionFormat I_FORMAT = new BasicInstructionFormat();
+	public static final BasicInstructionFormat I_BRANCH_FORMAT = new BasicInstructionFormat();
+	public static final BasicInstructionFormat J_FORMAT = new BasicInstructionFormat();
+
+	// private default constructor prevents objects of this class other than those above.
+	private BasicInstructionFormat() {
+	}
 }

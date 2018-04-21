@@ -38,7 +38,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  **/
 
 public class Exceptions {
-   /** The exception number is stored in coprocessor 0 cause register ($13)
+	/** The exception number is stored in coprocessor 0 cause register ($13)
 	* Note: the codes for External Interrupts have been modified from MIPS
 	*       specs in order to encode two pieces of information.  According
 	*       to spec, there is one External Interrupt code, 0.  But then 
@@ -50,8 +50,8 @@ public class Exceptions {
 	*       for inserting cause code into bit positions 2-6 in Cause register. 
 	*       DPS 23 July 2008.
 	 */
-   public static final int EXTERNAL_INTERRUPT_KEYBOARD = 0x00000040; // see comment above.
-   public static final int EXTERNAL_INTERRUPT_DISPLAY  = 0x00000080; // see comment above.
+	public static final int EXTERNAL_INTERRUPT_KEYBOARD = 0x00000040; // see comment above.
+	public static final int EXTERNAL_INTERRUPT_DISPLAY = 0x00000080;  // see comment above.
 	public static final int ADDRESS_EXCEPTION_LOAD = 4;
 	public static final int ADDRESS_EXCEPTION_STORE = 5;
 	public static final int SYSCALL_EXCEPTION = 8;
@@ -63,7 +63,7 @@ public class Exceptions {
 	public static final int DIVIDE_BY_ZERO_EXCEPTION = 15;
 	public static final int FLOATING_POINT_OVERFLOW = 16;
 	public static final int FLOATING_POINT_UNDERFLOW = 17;
-	
+
 	/**
 	 *  Given MIPS exception cause code, will place that code into 
 	 *  coprocessor 0 CAUSE register ($13), set the EPC register to
@@ -72,14 +72,14 @@ public class Exceptions {
 	 *  @param cause The cause code (see Exceptions for a list)
 	 */
 	public static void setRegisters(int cause) {
-	  // Set CAUSE register bits 2 thru 6 to cause value.  The "& 0xFFFFFC83" will set bits 2-6 and 8-9 to 0 while
-	  // keeping all the others.  Left-shift by 2 to put cause value into position then OR it in.  Bits 8-9 used to
-	  // identify devices for External Interrupt (8=keyboard,9=display).
-	  Coprocessor0.updateRegister(Coprocessor0.CAUSE,(Coprocessor0.getValue(Coprocessor0.CAUSE) & 0xFFFFFC83 | (cause << 2)));
-	  // When exception occurred, PC had already been incremented so need to subtract 4 here.
-	  Coprocessor0.updateRegister(Coprocessor0.EPC, RegisterFile.getProgramCounter()-Instruction.INSTRUCTION_LENGTH);
-	  // Set EXL (Exception Level) bit, bit position 1, in STATUS register to 1.
-	  Coprocessor0.updateRegister(Coprocessor0.STATUS, Binary.setBit(Coprocessor0.getValue(Coprocessor0.STATUS), Coprocessor0.EXCEPTION_LEVEL));
+		// Set CAUSE register bits 2 thru 6 to cause value.  The "& 0xFFFFFC83" will set bits 2-6 and 8-9 to 0 while
+		// keeping all the others.  Left-shift by 2 to put cause value into position then OR it in.  Bits 8-9 used to
+		// identify devices for External Interrupt (8=keyboard,9=display).
+		Coprocessor0.updateRegister(Coprocessor0.CAUSE, (Coprocessor0.getValue(Coprocessor0.CAUSE) & 0xFFFFFC83 | (cause << 2)));
+		// When exception occurred, PC had already been incremented so need to subtract 4 here.
+		Coprocessor0.updateRegister(Coprocessor0.EPC, RegisterFile.getProgramCounter() - Instruction.INSTRUCTION_LENGTH);
+		// Set EXL (Exception Level) bit, bit position 1, in STATUS register to 1.
+		Coprocessor0.updateRegister(Coprocessor0.STATUS, Binary.setBit(Coprocessor0.getValue(Coprocessor0.STATUS), Coprocessor0.EXCEPTION_LEVEL));
 	}
 
 	/**
@@ -88,10 +88,10 @@ public class Exceptions {
 	 *
 	 *  @param cause The cause code (see Exceptions for a list). Should be address exception.
 	 *  @param addr The address that caused the exception.
-	 */	
+	 */
 	public static void setRegisters(int cause, int addr) {
-	  Coprocessor0.updateRegister(Coprocessor0.VADDR,addr);
-	  setRegisters(cause);
+		Coprocessor0.updateRegister(Coprocessor0.VADDR, addr);
+		setRegisters(cause);
 	}
 
-}  // Exceptions
+} // Exceptions

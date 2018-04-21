@@ -38,18 +38,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 public class TokenList implements Cloneable {
-	
+
 	private ArrayList tokenList;
-	private String processedLine;// DPS 03-Jan-2013
+	private String processedLine; // DPS 03-Jan-2013
 
 	/**
 	 * Constructor for objects of class TokenList
 	 */
 	public TokenList() {
-        tokenList = new ArrayList();
-		  processedLine = ""; // DPS 03-Jan-2013
+		tokenList = new ArrayList();
+		processedLine = ""; // DPS 03-Jan-2013
 	}
-	
+
 	/**
 	 * Use this to record the source line String for this token list 
 	 * after possible modification (textual substitution) during 
@@ -57,9 +57,9 @@ public class TokenList implements Cloneable {
 	 * the Text Segment Display.
 	 * @param line The source line, possibly modified (possibly not)
 	 */
-   // DPS 03-Jan-2013
-   public void setProcessedLine(String line) {
-	   processedLine = line; 
+	// DPS 03-Jan-2013
+	public void setProcessedLine(String line) {
+		processedLine = line;
 	}
 
 	/**
@@ -67,20 +67,21 @@ public class TokenList implements Cloneable {
 	 * token list.  It may or may not have been modified during
 	 * assembly preprocessing.  
 	 * @return The source line for this token list.
-	 */   // DPS 03-Jan-2013/	
+	 */
+	// DPS 03-Jan-2013/
 	public String getProcessedLine() {
-	   return processedLine;
+		return processedLine;
 	}
-	
+
 	/**
 	 * Returns requested token given position number (starting at 0).
 	 * 
 	 * @param  pos   Position in token list.
 	 * @return     the requested token, or ArrayIndexOutOfBounds exception 
 	 */
-    public Token get(int pos) {
-        return (Token) tokenList.get(pos);
-    }
+	public Token get(int pos) {
+		return (Token)tokenList.get(pos);
+	}
 
 	/**
 	 * Replaces token at position with different one.  Will throw
@@ -89,46 +90,46 @@ public class TokenList implements Cloneable {
 	 * @param  pos   Position in token list.
 	 * @param  replacement Replacement token
 	 */
-    public void set(int pos, Token replacement) {
-        tokenList.set(pos, replacement); 
-    }
-	 
+	public void set(int pos, Token replacement) {
+		tokenList.set(pos, replacement);
+	}
+
 	/**
 	 * Returns number of tokens in list.
 	 * 
 	 * @return  token count. 
-	 */    
-    public int size() {
-        return tokenList.size();
-    }
+	 */
+	public int size() {
+		return tokenList.size();
+	}
 
 	/**
 	 * Adds a Token object to the end of the list.
 	 * 
 	 * @param  token   Token object to be added.
-	 */    
-    public void add(Token token) {
-        tokenList.add(token);
-    }
+	 */
+	public void add(Token token) {
+		tokenList.add(token);
+	}
 
 	/**
 	 * Removes Token object at specified list position. Uses ArrayList remove method.
 	 * 
 	 * @param  pos   Position in token list.  Subsequent Tokens are shifted one position left.
 	 * @throws IndexOutOfBoundsException if <tt>pos</tt> is < 0 or >= <tt>size()</tt>
-	 */    
-    public void remove(int pos) {
-        tokenList.remove(pos);
-    }
+	 */
+	public void remove(int pos) {
+		tokenList.remove(pos);
+	}
 
 	/**
 	 * Returns empty/non-empty status of list.
 	 * 
 	 * @return     <tt>true</tt> if list has no tokens, else <tt>false</tt>. 
-	 */    
-    public boolean isEmpty() {
-        return tokenList.isEmpty();
-    }
+	 */
+	public boolean isEmpty() {
+		return tokenList.isEmpty();
+	}
 
 	/**
 	 * Get a String representing the token list.
@@ -136,15 +137,14 @@ public class TokenList implements Cloneable {
 	 * @return     String version of the token list 
 	 * (a blank is inserted after each token). 
 	 */
-	     
-	 public String toString() {
-	    String stringified = "";
-		 for (int i=0; i<tokenList.size(); i++) {
-		   stringified += tokenList.get(i).toString()+" ";
-		 }
-		 return stringified;
-	}
 
+	public String toString() {
+		String stringified = "";
+		for (int i = 0; i < tokenList.size(); i++) {
+			stringified += tokenList.get(i).toString() + " ";
+		}
+		return stringified;
+	}
 
 	/**
 	 * Get a String representing the sequence of token types for this list.
@@ -152,13 +152,13 @@ public class TokenList implements Cloneable {
 	 * @return     String version of the token types for this list 
 	 * (a blank is inserted after each token type). 
 	 */
-	     
-	 public String toTypeString() {
-	    String stringified = "";
-		 for (int i=0; i<tokenList.size(); i++) {
-		   stringified += ((Token)tokenList.get(i)).getType().toString()+" ";
-		 }
-		 return stringified;
+
+	public String toTypeString() {
+		String stringified = "";
+		for (int i = 0; i < tokenList.size(); i++) {
+			stringified += ((Token)tokenList.get(i)).getType().toString() + " ";
+		}
+		return stringified;
 	}
 
 	/**
@@ -169,13 +169,13 @@ public class TokenList implements Cloneable {
 	// Clones are a bit tricky.  super.clone() handles primitives (e.g. values) correctly
 	// but the ArrayList itself has to be cloned separately -- otherwise clone will have
 	// alias to original token list!!
-    public Object clone() {
-        try {
-            TokenList t = (TokenList) super.clone();
-            t.tokenList = (ArrayList) tokenList.clone();
-            return t;
-        } catch (CloneNotSupportedException e) {
-            return null;
-        }
-    }
+	public Object clone() {
+		try {
+			TokenList t = (TokenList)super.clone();
+			t.tokenList = (ArrayList)tokenList.clone();
+			return t;
+		} catch (CloneNotSupportedException e) {
+			return null;
+		}
+	}
 }

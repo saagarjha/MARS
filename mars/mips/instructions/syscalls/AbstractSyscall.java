@@ -1,5 +1,5 @@
-   package mars.mips.instructions.syscalls;
-   import mars.*;
+package mars.mips.instructions.syscalls;
+import mars.*;
 /*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
 
@@ -28,7 +28,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 (MIT license, http://www.opensource.org/licenses/mit-license.html)
  */
 
-
 /** 
  *  Abstract class that a MIPS syscall system service may extend.  A qualifying service
  *  must be a class in the mars.mips.instructions.syscalls package that 
@@ -41,54 +40,54 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *  method will be invoked.
  *
  */
- 
-    public abstract class AbstractSyscall implements Syscall {
-      private int serviceNumber;
-      private String serviceName;
-   	 
-   /**
+
+public abstract class AbstractSyscall implements Syscall {
+	private int serviceNumber;
+	private String serviceName;
+
+	/**
     * Constructor is provided so subclass may initialize instance variables.
     * @param number default assigned service number
     * @param name service name which may be used for reference independent of number
     */
-       public AbstractSyscall(int number, String name) {
-         serviceNumber = number;
-         serviceName   = name;
-      }
-   	
-   /**
+	public AbstractSyscall(int number, String name) {
+		serviceNumber = number;
+		serviceName = name;
+	}
+
+	/**
    *  Return the name you have chosen for this syscall.  This can be used by a MARS
    *  user to refer to the service when choosing to override its default service
    *  number in the configuration file.
    *  @return service name as a string
    */
-       public String getName() {
-         return serviceName;
-      }
-   
-   /**
+	public String getName() {
+		return serviceName;
+	}
+
+	/**
    * Set the service number.  This is provided to allow MARS implementer or user
    * to override the default service number.
    * @param num specified service number to override the default.
    */
-       public void setNumber(int num) {
-         serviceNumber = num;
-      }
-   
-   /**
+	public void setNumber(int num) {
+		serviceNumber = num;
+	}
+
+	/**
    * Return the assigned service number.  This is the number the MIPS programmer
    * must store into $v0 before issuing the SYSCALL instruction.
    * @return assigned service number
    */
-       public int getNumber() {
-         return serviceNumber;
-      }
-   
-   /**
+	public int getNumber() {
+		return serviceNumber;
+	}
+
+	/**
    * Performs syscall function.  It will be invoked when the service is invoked
    * at simulation time.  Service is identified by value stored in $v0.
 	* @param statement ProgramStatement object for this syscall instruction.
    */
-       public abstract void simulate(ProgramStatement statement)
-		    throws ProcessingException;
-   }
+	public abstract void simulate(ProgramStatement statement)
+	    throws ProcessingException;
+}

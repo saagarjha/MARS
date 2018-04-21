@@ -1,7 +1,7 @@
-   package mars.mips.dump;
+package mars.mips.dump;
 
-   import mars.mips.hardware.*;
-   import java.io.*;
+import mars.mips.hardware.*;
+import java.io.*;
 /*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar
 
@@ -38,12 +38,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @version December 2007
  */
 
+public abstract class AbstractDumpFormat implements DumpFormat {
 
-    public abstract class AbstractDumpFormat implements DumpFormat {
-   
-      private String name, commandDescriptor, description,  extension;
-   	
-   	/**
+	private String name, commandDescriptor, description, extension;
+
+	/**
    	 *  Typical constructor.  Note you cannot creates objects from this
    	 *  class but subclass constructor can call this one.
    	 *  @param name Brief descriptive name to be displayed in selection list.
@@ -53,54 +52,53 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	 *   display in file save dialog or to be used as tool tip.
 		 *  @param extension Standard file extension for this format.  Null if none.
    	 */
-       public AbstractDumpFormat(String name, String commandDescriptor, 
-                                 String description, String extension) {
-         this.name = name;
-			this.commandDescriptor = (commandDescriptor==null) ? null : commandDescriptor.replaceAll(" ","");
-         this.description = description;
-         this.extension = extension;
-      }
-   			
-   			
-   /**
+	public AbstractDumpFormat(String name, String commandDescriptor,
+	                          String description, String extension) {
+		this.name = name;
+		this.commandDescriptor = (commandDescriptor == null) ? null : commandDescriptor.replaceAll(" ", "");
+		this.description = description;
+		this.extension = extension;
+	}
+
+	/**
    *  Get the file extension associated with this format.
    *  @return String containing file extension -- without the leading "." -- or
    *  null if there is no standard extension.
    */
-       public String getFileExtension() {
-         return extension;
-      }
-   
-   /**
+	public String getFileExtension() {
+		return extension;
+	}
+
+	/**
    *  Get a short description of the format, suitable for displaying along with
 	*  the extension, in the file save dialog, or as a tool tip.
    *  @return String containing short description to go with the extension
 	*  or for use as tool tip.  Possibly null.
    */
-       public String getDescription() {
-         return description;
-      }
-   
-   /**
+	public String getDescription() {
+		return description;
+	}
+
+	/**
     * String representing this object.
     * @return Name given for this object.
     *
     */
-       public String toString() {
-         return name;
-      }
-   
-   /**
+	public String toString() {
+		return name;
+	}
+
+	/**
     * One-word description of format to be used by MARS command mode parser
 	 * and user in conjunction with the "dump" option.
 	 * @return One-word String describing the format.
     *
     */
-       public String getCommandDescriptor() {
-         return commandDescriptor;
-      }
-   	    
-   /**
+	public String getCommandDescriptor() {
+		return commandDescriptor;
+	}
+
+	/**
    *  Write MIPS memory contents according to the
    *  specification for this format. 
    *
@@ -112,7 +110,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    *  @throws AddressErrorException if firstAddress is invalid or not on a word boundary.
    *  @throws IOException if error occurs during file output.
    */
-       public abstract void dumpMemoryRange(File file, int firstAddress, int lastAddress)
-		    throws AddressErrorException, IOException;
-   
-   }
+	public abstract void dumpMemoryRange(File file, int firstAddress, int lastAddress)
+	    throws AddressErrorException, IOException;
+}

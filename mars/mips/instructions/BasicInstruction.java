@@ -38,10 +38,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class BasicInstruction extends Instruction {
 
-    private String instructionName;
-    private BasicInstructionFormat instructionFormat;
-    private String operationMask;
-    private SimulationCode simulationCode;
+	private String instructionName;
+	private BasicInstructionFormat instructionFormat;
+	private String operationMask;
+	private SimulationCode simulationCode;
 
 	private int opcodeMask;  // integer with 1's where constants required (0/1 become 1, f/s/t become 0)
 	private int opcodeMatch; // integer matching constants required (0/1 become 0/1, f/s/t become 0)
@@ -68,30 +68,30 @@ public class BasicInstruction extends Instruction {
 	 * It can also be used at runtime to match a binary machine instruction to the correct
 	 * instruction simulator -- it needs to match all and only the 0's and 1's.
 	 */
-	public BasicInstruction(String example, String description, BasicInstructionFormat instrFormat, 
-	                 String operMask, SimulationCode simCode) {
-        this.exampleFormat = example;
-        this.mnemonic = this.extractOperator(example);
-        this.description = description;
-        this.instructionFormat = instrFormat;
-        this.operationMask = operMask.replaceAll(" ",""); // squeeze out any/all spaces
-		  if (operationMask.length() != Instruction.INSTRUCTION_LENGTH_BITS) {
-		        System.out.println(example+" mask not "+Instruction.INSTRUCTION_LENGTH_BITS+" bits!");
-				 }
-        this.simulationCode = simCode;
-
-		this.opcodeMask = (int) Long.parseLong(this.operationMask.replaceAll("[01]", "1").replaceAll("[^01]", "0"), 2);
-		this.opcodeMatch = (int) Long.parseLong(this.operationMask.replaceAll("[^1]", "0"), 2);
-	}
-	
-	  // Temporary constructor so that instructions without description yet will compile.
-	
-		public BasicInstruction(String example, BasicInstructionFormat instrFormat, 
-	                 String operMask, SimulationCode simCode) {
-						  this(example,"",instrFormat,operMask,simCode);
+	public BasicInstruction(String example, String description, BasicInstructionFormat instrFormat,
+	                        String operMask, SimulationCode simCode) {
+		this.exampleFormat = example;
+		this.mnemonic = this.extractOperator(example);
+		this.description = description;
+		this.instructionFormat = instrFormat;
+		this.operationMask = operMask.replaceAll(" ", ""); // squeeze out any/all spaces
+		if (operationMask.length() != Instruction.INSTRUCTION_LENGTH_BITS) {
+			System.out.println(example + " mask not " + Instruction.INSTRUCTION_LENGTH_BITS + " bits!");
 		}
-		
-      /**
+		this.simulationCode = simCode;
+
+		this.opcodeMask = (int)Long.parseLong(this.operationMask.replaceAll("[01]", "1").replaceAll("[^01]", "0"), 2);
+		this.opcodeMatch = (int)Long.parseLong(this.operationMask.replaceAll("[^1]", "0"), 2);
+	}
+
+	// Temporary constructor so that instructions without description yet will compile.
+
+	public BasicInstruction(String example, BasicInstructionFormat instrFormat,
+	                        String operMask, SimulationCode simCode) {
+		this(example, "", instrFormat, operMask, simCode);
+	}
+
+	/**
        * Gets the 32-character operation mask.  Each mask position represents a 
        * bit position in the 32-bit machine instruction.  Operation codes and
        * unused bits are represented in the mask by 1's and 0's.  Operand codes
@@ -101,10 +101,10 @@ public class BasicInstruction extends Instruction {
        * @return The 32 bit mask, as a String
        */
 	public String getOperationMask() {
-	    return operationMask;
+		return operationMask;
 	}
-	
-      /**
+
+	/**
        * Gets the operand format of the instruction.  MIPS defines 3 of these
        * R-format, I-format, and J-format.  R-format is all registers.  I-format
        * is address formed from register base with immediate offset.  J-format
@@ -116,9 +116,9 @@ public class BasicInstruction extends Instruction {
        * @return The machine instruction format, R, I, J or I-branch.
        */
 	public BasicInstructionFormat getInstructionFormat() {
-	    return instructionFormat;
+		return instructionFormat;
 	}
-	
+
 	/**
 	 * Gets the SimulationCode object.  It is really an object of an anonymous
 	 * class that implements the SimulationCode interface.  Such an object has but one
@@ -127,9 +127,9 @@ public class BasicInstruction extends Instruction {
 	 * @return the SimulationCode object for this instruction.
 	 * @see SimulationCode
 	 **/
-	 
+
 	public SimulationCode getSimulationCode() {
-	    return simulationCode;
+		return simulationCode;
 	}
 
 	public int getOpcodeMask() {

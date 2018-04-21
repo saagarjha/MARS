@@ -20,16 +20,15 @@ package mars.venus.editors.jeditsyntax.tokenmarker;
  * @version $Id: Token.java,v 1.12 1999/12/13 03:40:30 sp Exp $
  */
 
-public class Token
-{
- // NOTE from DPS 13-May-2010.
- // Please do not modify any of these constants!  It's not fatal or 
- // anything, but will cause funny results in the MARS Settings 
- // mechanism (at least temporarily until changed).  The
- // associated values here are appended into the key names for
- // persistent storage (e.g. registry) of syntax style information
- // for the various tokens.
- 
+public class Token {
+	// NOTE from DPS 13-May-2010.
+	// Please do not modify any of these constants!  It's not fatal or
+	// anything, but will cause funny results in the MARS Settings
+	// mechanism (at least temporarily until changed).  The
+	// associated values here are appended into the key names for
+	// persistent storage (e.g. registry) of syntax style information
+	// for the various tokens.
+
 	/**
 	 * Normal text token id. This should be used to mark
 	 * normal text.
@@ -46,7 +45,6 @@ public class Token
 	 */
 	public static final byte COMMENT2 = 2;
 
-	
 	/**
 	 * Literal 1 token id. This can be used to mark a string
 	 * literal (eg, C mode uses this to mark "..." literals)
@@ -99,11 +97,11 @@ public class Token
 	 */
 	public static final byte INVALID = 10;
 
-   /**
+	/**
 	 * Macro parameter token.  Added for MARS 4.3.
 	 */
 	public static final byte MACRO_ARG = 11;
-	
+
 	/**
 	 * The total number of defined token ids.
 	 */
@@ -147,8 +145,7 @@ public class Token
 	 * @param length The length of the token
 	 * @param id The id of the token
 	 */
-	public Token(int length, byte id)
-	{
+	public Token(int length, byte id) {
 		this.length = length;
 		this.id = id;
 	}
@@ -156,8 +153,7 @@ public class Token
 	/**
 	 * Returns a string representation of this token.
 	 */
-	public String toString()
-	{
+	public String toString() {
 		return "[id=" + id + ",length=" + length + "]";
 	}
 }

@@ -1,8 +1,8 @@
-   package mars.mips.dump;
+package mars.mips.dump;
 
-   import mars.Globals;
-   import mars.mips.hardware.*;
-   import java.io.*;
+import mars.Globals;
+import mars.mips.hardware.*;
+import java.io.*;
 /*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar
 
@@ -41,18 +41,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 // NOT READY FOR PRIME TIME.  WHEN IT IS, UNCOMMENT THE "extends" CLAUSE
-// AND THE SUPERCLASS CONSTRUCTOR CALL SO THE FORMAT LOADER WILL ACCEPT IT 
+// AND THE SUPERCLASS CONSTRUCTOR CALL SO THE FORMAT LOADER WILL ACCEPT IT
 // AND IT WILL BE ADDED TO THE LIST.
-    public class MIFDumpFormat { //extends AbstractDumpFormat {
-   
-   /**
+public class MIFDumpFormat { //extends AbstractDumpFormat {
+
+	/**
    * Constructor.  File extention is "mif".
-   */   
-       public MIFDumpFormat() {
-      //   super("MIF", "MIF", "Written as Memory Initialization File (Altera)", "mif");
-      }
-   
-   /**
+   */
+	public MIFDumpFormat() {
+		//   super("MIF", "MIF", "Written as Memory Initialization File (Altera)", "mif");
+	}
+
+	/**
    *  Write MIPS memory contents according to the Memory Initialization File
    *  (MIF) specification. 
    *
@@ -64,8 +64,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    *  @throws AddressErrorException if firstAddress is invalid or not on a word boundary.
    *  @throws IOException if error occurs during file output.
    */
-       public void dumpMemoryRange(File file, int firstAddress, int lastAddress)
-          throws AddressErrorException, IOException {
-      	 
-      }
-   }
+	public void dumpMemoryRange(File file, int firstAddress, int lastAddress)
+	    throws AddressErrorException, IOException {
+	}
+}

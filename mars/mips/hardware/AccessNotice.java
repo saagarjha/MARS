@@ -37,19 +37,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @version July 2005
  */
 
-
 public abstract class AccessNotice {
- /** Indicates the purpose of access was to read. */
-   public static final int READ  = 0;
- /** Indicates the purpose of access was to write. */
+	/** Indicates the purpose of access was to read. */
+	public static final int READ = 0;
+	/** Indicates the purpose of access was to write. */
 	public static final int WRITE = 1;
-	
+
 	private int accessType;
 	private Thread thread;
-	
+
 	protected AccessNotice(int type) {
-	   if (type != READ && type != WRITE) {
-		   throw new IllegalArgumentException();
+		if (type != READ && type != WRITE) {
+			throw new IllegalArgumentException();
 		}
 		accessType = type;
 		thread = Thread.currentThread();
@@ -58,32 +57,31 @@ public abstract class AccessNotice {
 	 * @return Access type, either AccessNotice.READ or AccessNotice.WRITE
 	 */
 	public int getAccessType() {
-	   return accessType;
+		return accessType;
 	}
-	
+
 	/** Get reference to thread that created this notice 
 	 * @return Return reference to the thread that created this notice.
 	 */
 	public Thread getThread() {
-	   return thread;
+		return thread;
 	}
 
 	/** Query whether the access originated from MARS GUI (AWT event queue)
 	 * @return true if this access originated from MARS GUI, false otherwise
 	 */
-	 // 'A' is the first character of the main AWT event queue thread name.
-	 // "AWT-EventQueue-0"
+	// 'A' is the first character of the main AWT event queue thread name.
+	// "AWT-EventQueue-0"
 	public boolean accessIsFromGUI() {
-	   return thread.getName().startsWith("AWT");
-	}	
-	
+		return thread.getName().startsWith("AWT");
+	}
+
 	/** Query whether the access originated from executing MIPS program
 	 * @return true if this access originated from executing MIPS program, false otherwise
 	 */
-	 // Thread to execute the MIPS program is instantiated in SwingWorker.java.
-	 // There it is given the name "MIPS" to replace the default "Thread-x". 
+	// Thread to execute the MIPS program is instantiated in SwingWorker.java.
+	// There it is given the name "MIPS" to replace the default "Thread-x".
 	public boolean accessIsFromMIPS() {
-	   return thread.getName().startsWith("MIPS");
-	}	
-	
+		return thread.getName().startsWith("MIPS");
+	}
 }

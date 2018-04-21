@@ -1,8 +1,8 @@
-   package mars.mips.dump;
+package mars.mips.dump;
 
-   import mars.Globals;
-   import mars.mips.hardware.*;
-   import java.io.*;
+import mars.Globals;
+import mars.mips.hardware.*;
+import java.io.*;
 /*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar
 
@@ -39,18 +39,16 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @version December 2007
  */
 
+public class BinaryDumpFormat extends AbstractDumpFormat {
 
-    public class BinaryDumpFormat extends AbstractDumpFormat {
-   
-   /**
+	/**
    *  Constructor.  There is no standard file extension for this format.
    */
-       public BinaryDumpFormat() {
-         super("Binary", "Binary", "Written as byte stream to binary file", null);
-      }
-   
-   
-   /**
+	public BinaryDumpFormat() {
+		super("Binary", "Binary", "Written as byte stream to binary file", null);
+	}
+
+	/**
    *  Write MIPS memory contents in pure binary format.  One byte at a time
 	*  using PrintStream's write() method.  Adapted by Pete Sanderson from
 	*  code written by Greg Gibeling.
@@ -63,22 +61,20 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	*  @throws AddressErrorException if firstAddress is invalid or not on a word boundary.
 	*  @throws IOException if error occurs during file output.
    */
-       public void dumpMemoryRange(File file, int firstAddress, int lastAddress) 
-        throws AddressErrorException, IOException {
-         PrintStream out = new PrintStream(new FileOutputStream(file));
-         try {
-            for (int address = firstAddress; address <= lastAddress; address += Memory.WORD_LENGTH_BYTES) {
-               Integer temp = Globals.memory.getRawWordOrNull(address);
-               if (temp == null) 
-                  break;
-               int word = temp.intValue();
-               for (int i = 0; i < 4; i++) 
-                  out.write((word >>> (i << 3)) & 0xFF);
-            }
-         } 
-         finally { 
-            out.close(); 
-         }
-      }
-   
-   }
+	public void dumpMemoryRange(File file, int firstAddress, int lastAddress)
+	    throws AddressErrorException, IOException {
+		PrintStream out = new PrintStream(new FileOutputStream(file));
+		try {
+			for (int address = firstAddress; address <= lastAddress; address += Memory.WORD_LENGTH_BYTES) {
+				Integer temp = Globals.memory.getRawWordOrNull(address);
+				if (temp == null)
+					break;
+				int word = temp.intValue();
+				for (int i = 0; i < 4; i++)
+					out.write((word >>> (i << 3)) & 0xFF);
+			}
+		} finally {
+			out.close();
+		}
+	}
+}
