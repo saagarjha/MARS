@@ -165,11 +165,17 @@ public class Editor {
 	public void setTitle(String path, String name, int status) {
 		if (status == FileStatus.NO_FILE || name == null || name.length() == 0) {
 			mainUI.setTitle(mainUIbaseTitle);
+			mainUI.getRootPane().putClientProperty("Window.documentFile", null);
 		} else {
-			String edited = (status == FileStatus.NEW_EDITED || status == FileStatus.EDITED) ? "*" : " ";
+			if (status == FileStatus.NEW_EDITED || status == FileStatus.EDITED) {
+				mainUI.getRootPane().putClientProperty("Window.documentModified", Boolean.TRUE);
+			} else {
+				mainUI.getRootPane().putClientProperty("Window.documentModified", Boolean.FALSE);
+			}
 			String titleName = (status == FileStatus.NEW_EDITED || status == FileStatus.NEW_NOT_EDITED) ? name : path;
-			mainUI.setTitle(titleName + edited + " - " + mainUIbaseTitle);
-			editTabbedPane.setTitleAt(editTabbedPane.getSelectedIndex(), name + edited);
+			mainUI.setTitle(titleName + " - " + mainUIbaseTitle);
+			editTabbedPane.setTitleAt(editTabbedPane.getSelectedIndex(), name);
+			mainUI.getRootPane().putClientProperty("Window.documentFile", new File(path));
 		}
 	}
 

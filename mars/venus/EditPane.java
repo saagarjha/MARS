@@ -11,6 +11,7 @@ import javax.swing.undo.*;
 import java.text.*;
 import java.util.*;
 import java.io.*;
+import java.nio.file.*;
 
 /*
 Copyright (c) 2003-2011,  Pete Sanderson and Kenneth Vollmar
@@ -255,6 +256,21 @@ public class EditPane extends JPanel implements Observer {
 		return sourceCode.getText();
 	}
 
+	public void reloadFile() {
+		try {
+			MIPSprogram program = new MIPSprogram();
+			program.readSource(getPathname());
+			StringBuilder source = new StringBuilder();
+			for (String line : (ArrayList<String>)program.getSourceList()) {
+				source.append(line);
+				source.append("\n");
+			}
+			setSourceCode(source.toString(), true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
    	 *  Set the editing status for this EditPane's associated document.
    	 *  For the argument, use one of the constants from class FileStatus.
@@ -293,6 +309,47 @@ public class EditPane extends JPanel implements Observer {
    	 */
 	public void setPathname(String pathname) {
 		this.fileStatus.setPathname(pathname);
+		// File parent = new File(pathname).getParentFile();
+		// if (parent == null) {
+		// 	return;
+		// }
+		// Path path = parent.toPath();
+		// try {
+		// 	WatchService watchService = path.getFileSystem().newWatchService();
+		// 	new Thread(new FileWatcher(watchService, this)).start();
+		// 	path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+		// } catch (Exception e) {
+		// 	e.printStackTrace();
+		// 	return;
+		// }
+	}
+
+	private static class FileWatcher implements Runnable {
+		private WatchService watchService;
+		private EditPane editPane;
+
+		public FileWatcher(WatchService watchService, EditPane editPane) {
+			this.watchService = watchService;
+			this.editPane = editPane;
+		}
+
+		public void run() {
+			try {
+				WatchKey key;
+				do {
+					key = watchService.take();
+					for (WatchEvent<?> event : key.pollEvents()) {
+						if (editPane.getFilename().equals(((Path)event.context()).toString()) &&
+						    event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
+							editPane.reloadFile();
+						}
+					}
+					Thread.sleep(1000);
+				} while (key.reset());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**

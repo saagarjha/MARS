@@ -56,7 +56,7 @@ public class DataSegmentWindow extends JInternalFrame implements Observer {
 	private JButton dataButton, nextButton, prevButton, stakButton, globButton, heapButton, kernButton, extnButton, mmioButton, textButton;
 	private JCheckBox asciiDisplayCheckBox;
 
-	static final int VALUES_PER_ROW = 8;
+	static final int VALUES_PER_ROW = 4;
 	static final int NUMBER_OF_ROWS = 16;                    // with 8 value columns, this shows 512 bytes;
 	static final int NUMBER_OF_COLUMNS = VALUES_PER_ROW + 1; // 1 for address and 8 for values
 	static final int BYTES_PER_VALUE = 4;
@@ -97,6 +97,8 @@ public class DataSegmentWindow extends JInternalFrame implements Observer {
 
 	public DataSegmentWindow(NumberDisplayBaseChooser[] choosers) {
 		super("Data Segment", true, false, true, true);
+
+		putClientProperty("JInternalFrame.frameType", "normal");
 
 		Simulator.getInstance().addObserver(this);
 		settings = Globals.getSettings();

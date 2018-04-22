@@ -1,6 +1,7 @@
 package mars.venus;
 import mars.*;
 import java.awt.*;
+import java.awt.desktop.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -35,13 +36,21 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /**
     * Action  for the Help -> About menu item
     */
-public class HelpAboutAction extends GuiAction {
+public class HelpAboutAction extends GuiAction implements AboutHandler {
 	public HelpAboutAction(String name, Icon icon, String descrip,
 	                       Integer mnemonic, KeyStroke accel, VenusUI gui) {
 		super(name, icon, descrip, mnemonic, accel, gui);
 	}
 
+	public void handleAbout(AboutEvent e) {
+		handleEvent(e);
+	}
+
 	public void actionPerformed(ActionEvent e) {
+		handleEvent(e);
+	}
+
+	public void handleEvent(Object e) {
 		JOptionPane.showMessageDialog(mainUI,
 		                              "MARS " + Globals.version + "    Copyright " + Globals.copyrightYears + "\n" +
 		                                  Globals.copyrightHolders + "\n"

@@ -1,3 +1,5 @@
+import java.awt.*;
+import javax.swing.*;
 
 /*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
@@ -36,6 +38,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 public class Mars {
 	public static void main(String[] args) {
+		System.setProperty("apple.laf.useScreenMenuBar", "true");
+		System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Mars");
+		Taskbar.getTaskbar().setIconImage(new ImageIcon("images/MarsThumbnail.gif").getImage());
 		new mars.MarsLaunch(args);
 	}
 }

@@ -8,6 +8,7 @@ import java.io.*;
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.plaf.*;
 import javax.swing.JOptionPane; // KENV 9/8/2004
 
 /*
@@ -48,53 +49,53 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 public class MarsLaunch {
 
 	/**
-    * Main takes a number of command line arguments.<br>
-      Usage:  Mars  [options] filename<br>
-      Valid options (not case sensitive, separate by spaces) are:<br>
-            a  -- assemble only, do not simulate<br>
-           ad  -- both a and d<br>
-   	  ae<n>  -- terminate MARS with integer exit code <n> if an assemble error occurs.<br>
-   	  ascii  -- display memory or register contents interpreted as ASCII
-   		   b  -- brief - do not display register/memory address along with contents<br>
-   		   d  -- print debugging statements<br>
-           da  -- both a and d<br>
-           db  -- MIPS delayed branching is enabled.<br>
-          dec  -- display memory or register contents in decimal.<br>
-         dump  -- dump memory contents to file.  Option has 3 arguments, e.g. <br>
-                  <tt>dump &lt;segment&gt; &lt;format&gt; &lt;file&gt;</tt>.  Also supports<br>
-                  an address range (see <i>m-n</i> below).  Current supported <br>
-                  segments are <tt>.text</tt> and <tt>.data</tt>.  Current supported dump formats <br>
-                  are <tt>Binary</tt>, <tt>HexText</tt>, <tt>BinaryText</tt>.<br>
-            h  -- display help.  Use by itself and with no filename</br>
-          hex  -- display memory or register contents in hexadecimal (default)<br>
-           ic  -- display count of MIPS basic instructions 'executed'");
-           mc  -- set memory configuration.  Option has 1 argument, e.g.<br>
-                  <tt>mc &lt;config$gt;</tt>, where &lt;config$gt; is <tt>Default</tt><br>
-                  for the MARS default 32-bit address space, <tt>CompactDataAtZero</tt> for<br>
-                  a 32KB address space with data segment at address 0, or <tt>CompactTextAtZero</tt><br>
-                  for a 32KB address space with text segment at address 0.<br>
-           me  -- display MARS messages to standard err instead of standard out. Can separate via redirection.</br>
-           nc  -- do not display copyright notice (for cleaner redirected/piped output).</br>
-   		  np  -- No Pseudo-instructions allowed ("ne" will work also).<br>
-   		   p  -- Project mode - assemble all files in the same directory as given file.<br>
-   	  se<n>  -- terminate MARS with integer exit code <n> if a simulation (run) error occurs.<br>
-           sm  -- Start execution at Main - Execution will start at program statement globally labeled main.<br>
-          smc  -- Self Modifying Code - Program can write and branch to either text or data segment<br>
-           we  -- assembler Warnings will be considered Errors<br>
-          <n>  -- where <n> is an integer maximum count of steps to simulate.<br>
-                  If 0, negative or not specified, there is no maximum.<br>
-       $<reg>  -- where <reg> is number or name (e.g. 5, t3, f10) of register whose <br>
-                  content to display at end of run.  Option may be repeated.<br>
-   <reg_name>  -- where <reg_name> is name (e.g. t3, f10) of register whose <br>
-                  content to display at end of run.  Option may be repeated. $ not required.<br>
-      <m>-<n>  -- memory address range from <m> to <n> whose contents to<br>
-                  display at end of run. <m> and <n> may be hex or decimal,<br>
-                  <m> <= <n>, both must be on word boundary.  Option may be repeated.<br>
-           pa  -- Program Arguments follow in a space-separated list.  This<br>
-                  option must be placed AFTER ALL FILE NAMES, because everything<br>
-                  that follows it is interpreted as a program argument to be<br>
-                  made available to the MIPS program at runtime.<br>
-    **/
+     * Main takes a number of command line arguments.<br>
+     *    Usage:  Mars  [options] filename<br>
+     *    Valid options (not case sensitive, separate by spaces) are:<br>
+     *          a  -- assemble only, do not simulate<br>
+     *         ad  -- both a and d<br>
+     * 	    ae<n>  -- terminate MARS with integer exit code <n> if an assemble error occurs.<br>
+     * 	    ascii  -- display memory or register contents interpreted as ASCII
+     * 		    b  -- brief - do not display register/memory address along with contents<br>
+     * 		    d  -- print debugging statements<br>
+     *         da  -- both a and d<br>
+     *         db  -- MIPS delayed branching is enabled.<br>
+     *        dec  -- display memory or register contents in decimal.<br>
+     *       dump  -- dump memory contents to file.  Option has 3 arguments, e.g. <br>
+     *                <tt>dump &lt;segment&gt; &lt;format&gt; &lt;file&gt;</tt>.  Also supports<br>
+     *                an address range (see <i>m-n</i> below).  Current supported <br>
+     *                segments are <tt>.text</tt> and <tt>.data</tt>.  Current supported dump formats <br>
+     *                are <tt>Binary</tt>, <tt>HexText</tt>, <tt>BinaryText</tt>.<br>
+     *          h  -- display help.  Use by itself and with no filename</br>
+     *        hex  -- display memory or register contents in hexadecimal (default)<br>
+     *         ic  -- display count of MIPS basic instructions 'executed'");
+     *         mc  -- set memory configuration.  Option has 1 argument, e.g.<br>
+     *                <tt>mc &lt;config$gt;</tt>, where &lt;config$gt; is <tt>Default</tt><br>
+     *                for the MARS default 32-bit address space, <tt>CompactDataAtZero</tt> for<br>
+     *                a 32KB address space with data segment at address 0, or <tt>CompactTextAtZero</tt><br>
+     *                for a 32KB address space with text segment at address 0.<br>
+     *         me  -- display MARS messages to standard err instead of standard out. Can separate via redirection.</br>
+     *         nc  -- do not display copyright notice (for cleaner redirected/piped output).</br>
+     * 		   np  -- No Pseudo-instructions allowed ("ne" will work also).<br>
+     * 		    p  -- Project mode - assemble all files in the same directory as given file.<br>
+     * 	    se<n>  -- terminate MARS with integer exit code <n> if a simulation (run) error occurs.<br>
+     *         sm  -- Start execution at Main - Execution will start at program statement globally labeled main.<br>
+     *        smc  -- Self Modifying Code - Program can write and branch to either text or data segment<br>
+     *         we  -- assembler Warnings will be considered Errors<br>
+     *        <n>  -- where <n> is an integer maximum count of steps to simulate.<br>
+     *                If 0, negative or not specified, there is no maximum.<br>
+     *     $<reg>  -- where <reg> is number or name (e.g. 5, t3, f10) of register whose <br>
+     *                content to display at end of run.  Option may be repeated.<br>
+     * <reg_name>  -- where <reg_name> is name (e.g. t3, f10) of register whose <br>
+     *                content to display at end of run.  Option may be repeated. $ not required.<br>
+     *    <m>-<n>  -- memory address range from <m> to <n> whose contents to<br>
+     *                display at end of run. <m> and <n> may be hex or decimal,<br>
+     *                <m> <= <n>, both must be on word boundary.  Option may be repeated.<br>
+     *         pa  -- Program Arguments follow in a space-separated list.  This<br>
+     *                option must be placed AFTER ALL FILE NAMES, because everything<br>
+     *                that follows it is interpreted as a program argument to be<br>
+     *                made available to the MIPS program at runtime.<br>
+     */
 
 	private boolean simulate;
 	private int displayFormat;
@@ -227,8 +228,19 @@ public class MarsLaunch {
 	// launching the GUI-fronted integrated development environment.
 
 	private void launchIDE() {
-		// System.setProperty("apple.laf.useScreenMenuBar", "true"); // Puts MARS menu on Mac OS menu bar
+		System.setProperty("apple.laf.useScreenMenuBar", "true");
+		Enumeration keys = UIManager.getDefaults().keys();
+		while (keys.hasMoreElements()) {
+			Object key = keys.nextElement();
+			Object value = UIManager.get(key);
+			if (value instanceof FontUIResource) {
+				FontUIResource resource = (FontUIResource)value;
+				UIManager.put(key, new FontUIResource(".SF NS Text", resource.getStyle(), resource.getSize()));
+			}
+		}
+
 		new MarsSplashScreen(splashDuration).showSplash();
+
 		SwingUtilities.invokeLater(
 		    new Runnable() {
 			    public void run() {

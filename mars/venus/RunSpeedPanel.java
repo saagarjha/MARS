@@ -123,7 +123,7 @@ public class RunSpeedPanel extends JPanel {
 			} else {
 				result += ((int)speedTable[index]);
 			}
-			result += " inst/sec";
+			result += " instructions/second";
 		} else {
 			result += ("at max (no interaction)");
 		}

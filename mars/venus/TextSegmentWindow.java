@@ -70,7 +70,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
 	private TableModelListener tableModelListener;
 	private boolean inDelaySlot; // Added 25 June 2007
 
-	private static String[] columnNames = {"Bkpt", "Address", "Code", "Basic", "Source"};
+	private static String[] columnNames = {"Br", "Address", "Code", "Basic", "Source"};
 	private static final int BREAK_COLUMN = 0;
 	private static final int ADDRESS_COLUMN = 1;
 	private static final int CODE_COLUMN = 2;
@@ -87,6 +87,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
 
 	public TextSegmentWindow() {
 		super("Text Segment", true, false, true, true);
+		putClientProperty("JInternalFrame.frameType", "normal");
 		Simulator.getInstance().addObserver(this);
 		Globals.getSettings().addObserver(this);
 		contentPane = this.getContentPane();
@@ -139,7 +140,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
 				String lineNumber = "          ".substring(0, leadingSpaces) + statement.getSourceLine() + ": ";
 				if (statement.getSourceLine() == lastLine)
 					lineNumber = "          ".substring(0, sourceLineDigits) + "  ";
-				sourceString = lineNumber + mars.util.EditorFont.substituteSpacesForTabs(statement.getSource());
+				sourceString = lineNumber + statement.getSource().replaceAll("\t", "");
 			}
 			data[i][SOURCE_COLUMN] = sourceString;
 			lastLine = statement.getSourceLine();
@@ -155,16 +156,16 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
 		// prevents cells in row from being highlighted when user clicks on breakpoint checkbox
 		table.setRowSelectionAllowed(false);
 
-		table.getColumnModel().getColumn(BREAK_COLUMN).setMinWidth(40);
+		table.getColumnModel().getColumn(BREAK_COLUMN).setMinWidth(20);
 		table.getColumnModel().getColumn(ADDRESS_COLUMN).setMinWidth(80);
 		table.getColumnModel().getColumn(CODE_COLUMN).setMinWidth(80);
 
 		table.getColumnModel().getColumn(BREAK_COLUMN).setMaxWidth(50);
 		table.getColumnModel().getColumn(ADDRESS_COLUMN).setMaxWidth(90);
 		table.getColumnModel().getColumn(CODE_COLUMN).setMaxWidth(90);
-		table.getColumnModel().getColumn(BASIC_COLUMN).setMaxWidth(200);
+		table.getColumnModel().getColumn(BASIC_COLUMN).setMinWidth(160);
 
-		table.getColumnModel().getColumn(BREAK_COLUMN).setPreferredWidth(40);
+		table.getColumnModel().getColumn(BREAK_COLUMN).setPreferredWidth(20);
 		table.getColumnModel().getColumn(ADDRESS_COLUMN).setPreferredWidth(80);
 		table.getColumnModel().getColumn(CODE_COLUMN).setPreferredWidth(80);
 		table.getColumnModel().getColumn(BASIC_COLUMN).setPreferredWidth(160);

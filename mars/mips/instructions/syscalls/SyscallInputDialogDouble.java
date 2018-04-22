@@ -110,7 +110,7 @@ public class SyscallInputDialogDouble extends AbstractSyscall {
 		catch (NumberFormatException e) // Unsuccessful parse of input data
 		{
 			RegisterFile.updateRegister(5, -1); // set $a1 to -1 flag
-			/*  Don't throw exception because returning a status flag
+			                                    /*  Don't throw exception because returning a status flag
                    throw new ProcessingException(statement,
                       "invalid float input (syscall "+this.getNumber()+")",
 						          Exceptions.SYSCALL_EXCEPTION);

@@ -63,8 +63,8 @@ public class RegistersWindow extends JPanel implements Observer {
 		settings = Globals.getSettings();
 		this.highlighting = false;
 		table = new MyTippedJTable(new RegTableModel(setupWindow()));
-		table.getColumnModel().getColumn(NAME_COLUMN).setPreferredWidth(25);
-		table.getColumnModel().getColumn(NUMBER_COLUMN).setPreferredWidth(25);
+		table.getColumnModel().getColumn(NAME_COLUMN).setPreferredWidth(20);
+		table.getColumnModel().getColumn(NUMBER_COLUMN).setPreferredWidth(20);
 		table.getColumnModel().getColumn(VALUE_COLUMN).setPreferredWidth(60);
 		// Display register values (String-ified) right-justified in mono font
 		table.getColumnModel().getColumn(NAME_COLUMN).setCellRenderer(new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.LEFT));
@@ -258,7 +258,7 @@ public class RegistersWindow extends JPanel implements Observer {
 	////////////////////////////////////////////////////////////////////////////
 
 	class RegTableModel extends AbstractTableModel {
-		final String[] columnNames = {"Name", "Number", "Value"};
+		final String[] columnNames = {"Name", "Num", "Value"};
 		Object[][] data;
 
 		public RegTableModel(Object[][] d) {

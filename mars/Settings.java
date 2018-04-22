@@ -173,13 +173,13 @@ public class Settings extends Observable {
 	public static final int REGISTER_HIGHLIGHT_FONT = 6;
 
 	private static final String[] fontFamilySettingsKeys = {"EditorFontFamily", "EvenRowFontFamily",
-	                                                        "OddRowFontFamily", " TextSegmentHighlightFontFamily", "TextSegmentDelayslotHighightFontFamily",
+	                                                        "OddRowFontFamily", "TextSegmentHighlightFontFamily", "TextSegmentDelayslotHighlightFontFamily",
 	                                                        "DataSegmentHighlightFontFamily", "RegisterHighlightFontFamily"};
 	private static final String[] fontStyleSettingsKeys = {"EditorFontStyle", "EvenRowFontStyle",
-	                                                       "OddRowFontStyle", " TextSegmentHighlightFontStyle", "TextSegmentDelayslotHighightFontStyle",
+	                                                       "OddRowFontStyle", " TextSegmentHighlightFontStyle", "TextSegmentDelayslotHighlightFontStyle",
 	                                                       "DataSegmentHighlightFontStyle", "RegisterHighlightFontStyle"};
 	private static final String[] fontSizeSettingsKeys = {"EditorFontSize", "EvenRowFontSize",
-	                                                      "OddRowFontSize", " TextSegmentHighlightFontSize", "TextSegmentDelayslotHighightFontSize",
+	                                                      "OddRowFontSize", " TextSegmentHighlightFontSize", "TextSegmentDelayslotHighlightFontSize",
 	                                                      "DataSegmentHighlightFontSize", "RegisterHighlightFontSize"};
 
 	/** Last resort default values for Font settings; 
@@ -435,86 +435,94 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.BARE_MACHINE_ENABLED</code>)
    	 */
+	@Deprecated
 	public boolean getBareMachineEnabled() {
 		return booleanSettingsValues[BARE_MACHINE_ENABLED];
 	}
 	/**
-   	   * Setting for whether user programs can use pseudo-instructions or extended addressing modes
-   		* or alternative instruction formats (all are implemented as pseudo-instructions).
-   		* @return true if pseudo-instructions and formats permitted, false otherwise.
-   	   *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.EXTENDED_ASSEMBLER_ENABLED</code>)
-   		*/
+   	 * Setting for whether user programs can use pseudo-instructions or extended addressing modes
+   	 * or alternative instruction formats (all are implemented as pseudo-instructions).
+   	 * @return true if pseudo-instructions and formats permitted, false otherwise.
+   	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.EXTENDED_ASSEMBLER_ENABLED</code>)
+   	 */
+	@Deprecated
 	public boolean getExtendedAssemblerEnabled() {
 		return booleanSettingsValues[EXTENDED_ASSEMBLER_ENABLED];
 	}
 
 	/**
-   	   * Setting for whether selected program will be automatically assembled upon opening. This
-   		* can be useful if user employs an external editor such as MIPSter.
-   		* @return true if file is to be automatically assembled upon opening and false otherwise.
-   	   *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.ASSEMBLE_ON_OPEN_ENABLED</code>)
-   		*/
+   	 * Setting for whether selected program will be automatically assembled upon opening. This
+   	 * can be useful if user employs an external editor such as MIPSter.
+   	 * @return true if file is to be automatically assembled upon opening and false otherwise.
+   	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.ASSEMBLE_ON_OPEN_ENABLED</code>)
+   	 */
+	@Deprecated
 	public boolean getAssembleOnOpenEnabled() {
 		return booleanSettingsValues[ASSEMBLE_ON_OPEN_ENABLED];
 	}
 
 	/**
-   	   * Setting for whether Addresses in the Execute pane will be displayed in hexadecimal.
-   		* @return true if addresses are displayed in hexadecimal and false otherwise (decimal).
-   	   *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.DISPLAY_ADDRESSES_IN_HEX</code>)
-   		*/
+   	 * Setting for whether Addresses in the Execute pane will be displayed in hexadecimal.
+   	 * @return true if addresses are displayed in hexadecimal and false otherwise (decimal).
+   	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.DISPLAY_ADDRESSES_IN_HEX</code>)
+     */
+	@Deprecated
 	public boolean getDisplayAddressesInHex() {
 		return booleanSettingsValues[DISPLAY_ADDRESSES_IN_HEX];
 	}
 
 	/**
-   	   * Setting for whether values in the Execute pane will be displayed in hexadecimal.
-   		* @return true if values are displayed in hexadecimal and false otherwise (decimal).
-   	   *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.DISPLAY_VALUES_IN_HEX</code>)
-   		*/
+   	 * Setting for whether values in the Execute pane will be displayed in hexadecimal.
+   	 * @return true if values are displayed in hexadecimal and false otherwise (decimal).
+   	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.DISPLAY_VALUES_IN_HEX</code>)
+   	 */
+	@Deprecated
 	public boolean getDisplayValuesInHex() {
 		return booleanSettingsValues[DISPLAY_VALUES_IN_HEX];
 	}
 
 	/**
-   	   * Setting for whether the assemble operation applies only to the file currently open in
-   		* the editor or whether it applies to all files in that file's directory (primitive project
-   		* capability).  If the "assemble on open" setting is set, this "assemble all" setting will
-   		* be applied as soon as the file is opened.
-   		* @return true if all files are to be assembled, false if only the file open in editor.
-   	   *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.ASSEMBLE_ALL_ENABLED</code>)
-   		*/
+   	 * Setting for whether the assemble operation applies only to the file currently open in
+	 * the editor or whether it applies to all files in that file's directory (primitive project
+	 * capability).  If the "assemble on open" setting is set, this "assemble all" setting will
+	 * be applied as soon as the file is opened.
+	 * @return true if all files are to be assembled, false if only the file open in editor.
+   	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.ASSEMBLE_ALL_ENABLED</code>)
+   	 */
+	@Deprecated
 	public boolean getAssembleAllEnabled() {
 		return booleanSettingsValues[ASSEMBLE_ALL_ENABLED];
 	}
 
 	/**
-   	   * Setting for whether the currently selected exception handler
-   		* (a MIPS source file) will be automatically included in each
-   		* assemble operation.
-   		@return true if exception handler is to be included in assemble, false otherwise.
-   	   *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.EXCEPTION_HANDLER_ENABLED</code>)
-   		*/
+   	 * Setting for whether the currently selected exception handler
+   	 * (a MIPS source file) will be automatically included in each
+   	 * assemble operation.
+   	 * @return true if exception handler is to be included in assemble, false otherwise.
+   	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.EXCEPTION_HANDLER_ENABLED</code>)
+   	 */
+	@Deprecated
 	public boolean getExceptionHandlerEnabled() {
 		return booleanSettingsValues[EXCEPTION_HANDLER_ENABLED];
 	}
 
 	/**
-   	   * Setting for whether delayed branching will be applied during MIPS
-   		* program execution.  If enabled, the statement following a successful
-   		* branch will be executed and then the branch is taken!  This simulates
-   		* pipelining and all MIPS processors do it.  However it is confusing to
-   		* assembly language students so is disabled by default.  SPIM does same thing.
-   		@return true if delayed branching is enabled, false otherwise.
-   	   *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.DELAYED_BRANCHING_ENABLED</code>)
-   		*/
+   	 * Setting for whether delayed branching will be applied during MIPS
+   	 * program execution.  If enabled, the statement following a successful
+   	 * branch will be executed and then the branch is taken!  This simulates
+   	 * pipelining and all MIPS processors do it.  However it is confusing to
+   	 * assembly language students so is disabled by default.  SPIM does same thing.
+   	 * @return true if delayed branching is enabled, false otherwise.
+   	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.DELAYED_BRANCHING_ENABLED</code>)
+   	 */
+	@Deprecated
 	public boolean getDelayedBranchingEnabled() {
 		return booleanSettingsValues[DELAYED_BRANCHING_ENABLED];
 	}
@@ -525,6 +533,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.LABEL_WINDOW_VISIBILITY</code>)
    	 */
+	@Deprecated
 	public boolean getLabelWindowVisibility() {
 		return booleanSettingsValues[LABEL_WINDOW_VISIBILITY];
 	}
@@ -535,6 +544,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.EDITOR_LINE_NUMBERS_DISPLAYED</code>)
    	 */
+	@Deprecated
 	public boolean getEditorLineNumbersDisplayed() {
 		return booleanSettingsValues[EDITOR_LINE_NUMBERS_DISPLAYED];
 	}
@@ -545,6 +555,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.WARNINGS_ARE_ERRORS</code>)
    	 */
+	@Deprecated
 	public boolean getWarningsAreErrors() {
 		return booleanSettingsValues[WARNINGS_ARE_ERRORS];
 	}
@@ -555,6 +566,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.PROGRAM_ARGUMENTS</code>)
    	 */
+	@Deprecated
 	public boolean getProgramArguments() {
 		return booleanSettingsValues[PROGRAM_ARGUMENTS];
 	}
@@ -565,6 +577,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.DATA_SEGMENT_HIGHLIGHTING</code>)
    	 */
+	@Deprecated
 	public boolean getDataSegmentHighlighting() {
 		return booleanSettingsValues[DATA_SEGMENT_HIGHLIGHTING];
 	}
@@ -576,6 +589,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.REGISTERS_HIGHLIGHTING</code>)
    	 */
+	@Deprecated
 	public boolean getRegistersHighlighting() {
 		return booleanSettingsValues[REGISTERS_HIGHLIGHTING];
 	}
@@ -587,6 +601,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>getBooleanSetting(int id)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.START_AT_MAIN</code>)
    	 */
+	@Deprecated
 	public boolean getStartAtMain() {
 		return booleanSettingsValues[START_AT_MAIN];
 	}
@@ -783,93 +798,100 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.EXTENDED_ASSEMBLER_ENABLED</code>)
    	 */
+	@Deprecated
 	public void setExtendedAssemblerEnabled(boolean value) {
 		internalSetBooleanSetting(EXTENDED_ASSEMBLER_ENABLED, value);
 	}
 
 	/**
-   	   * Establish setting for whether a file will be automatically assembled as soon as it
-   		* is opened.  This is handy for those using an external text editor such as Mipster.
-   		* If setting changes, new setting will be written to properties file.   
-   	   * @param value True to automatically assemble, false otherwise.
-   	   *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.ASSEMBLE_ON_OPEN_ENABLED</code>)
-   		*/
+   	 * Establish setting for whether a file will be automatically assembled as soon as it
+   	 * is opened.  This is handy for those using an external text editor such as Mipster.
+   	 * If setting changes, new setting will be written to properties file.   
+   	 * @param value True to automatically assemble, false otherwise.
+   	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.ASSEMBLE_ON_OPEN_ENABLED</code>)
+   	 */
+	@Deprecated
 	public void setAssembleOnOpenEnabled(boolean value) {
 		internalSetBooleanSetting(ASSEMBLE_ON_OPEN_ENABLED, value);
 	}
 
 	/**
-   	   * Establish setting for whether a file will be assembled by itself (false) or along
-   		* with all other files in its directory (true).  This permits multi-file programs
-   		* and a primitive "project" capability.  If setting changes,
-   	   * new setting will be written to properties file.
-   		* @param value True to assemble all, false otherwise.
-   	   *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.ASSEMBLE_ALL_ENABLED</code>)
-   		*/
+   	 * Establish setting for whether a file will be assembled by itself (false) or along
+   	 * with all other files in its directory (true).  This permits multi-file programs
+   	 * and a primitive "project" capability.  If setting changes,
+   	 * new setting will be written to properties file.
+   	 * @param value True to assemble all, false otherwise.
+   	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.ASSEMBLE_ALL_ENABLED</code>)
+   	 */
+	@Deprecated
 	public void setAssembleAllEnabled(boolean value) {
 		internalSetBooleanSetting(ASSEMBLE_ALL_ENABLED, value);
 	}
 
 	/**
-   	   * Establish setting for whether addresses in the Execute pane will be displayed
-   		* in hexadecimal format.
-   		* @param value True to display addresses in hexadecimal, false for decimal.
-   	   *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.DISPLAY_ADDRESSES_IN_HEX</code>)
-   		*/
+   	 * Establish setting for whether addresses in the Execute pane will be displayed
+   	 * in hexadecimal format.
+   	 * @param value True to display addresses in hexadecimal, false for decimal.
+   	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.DISPLAY_ADDRESSES_IN_HEX</code>)
+   	 */
+	@Deprecated
 	public void setDisplayAddressesInHex(boolean value) {
 		internalSetBooleanSetting(DISPLAY_ADDRESSES_IN_HEX, value);
 	}
 
 	/**
-   	   * Establish setting for whether values in the Execute pane will be displayed
-   		* in hexadecimal format.
-   		* @param value True to display values in hexadecimal, false for decimal.
-   	   *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.DISPLAY_VALUES_IN_HEX</code>)
-   		*/
+   	 * Establish setting for whether values in the Execute pane will be displayed
+   	 * in hexadecimal format.
+   	 * @param value True to display values in hexadecimal, false for decimal.
+   	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.DISPLAY_VALUES_IN_HEX</code>)
+   	 */
+	@Deprecated
 	public void setDisplayValuesInHex(boolean value) {
 		internalSetBooleanSetting(DISPLAY_VALUES_IN_HEX, value);
 	}
 
 	/**
-   	   * Establish setting for whether the labels window (i.e. symbol table) will
-   		* be displayed as part of the Text Segment display.  If setting changes,
-   	   * new setting will be written to properties file.
-   		* @param value True to dispay labels window, false otherwise.
-   	   *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.LABEL_WINDOW_VISIBILITY</code>)
-   		*/
+   	 * Establish setting for whether the labels window (i.e. symbol table) will
+   	 * be displayed as part of the Text Segment display.  If setting changes,
+   	 * new setting will be written to properties file.
+   	 * @param value True to dispay labels window, false otherwise.
+   	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.LABEL_WINDOW_VISIBILITY</code>)
+   	 */
+	@Deprecated
 	public void setLabelWindowVisibility(boolean value) {
 		internalSetBooleanSetting(LABEL_WINDOW_VISIBILITY, value);
 	}
 
 	/**
-   	   * Establish setting for whether the currently selected exception handler
-   		* (a MIPS source file) will be automatically included in each
-   		* assemble operation. If setting changes, new setting will be written 
-   		* to properties file.
-   		* @param value True to assemble exception handler, false otherwise.
-   	   *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.EXCEPTION_HANDLER_ENABLED</code>)
-   		*/
+   	 * Establish setting for whether the currently selected exception handler
+   	 * (a MIPS source file) will be automatically included in each
+   	 * assemble operation. If setting changes, new setting will be written 
+   	 * to properties file.
+   	 * @param value True to assemble exception handler, false otherwise.
+   	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
+   	 *  (e.g. <code>Settings.EXCEPTION_HANDLER_ENABLED</code>)
+   	 */
+	@Deprecated
 	public void setExceptionHandlerEnabled(boolean value) {
 		internalSetBooleanSetting(EXCEPTION_HANDLER_ENABLED, value);
 	}
 
 	/**
-   	   * Establish setting for whether delayed branching will be applied during 
-   		* MIPS program execution.  If enabled, the statement following a successful
-   		* branch will be executed and then the branch is taken!  This simulates
-   		* pipelining and all MIPS processors do it.  However it is confusing to
-   		* assembly language students so is disabled by default.  SPIM does same thing.
-   		* @param value True to enable delayed branching, false otherwise.
-   	   *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
-   	   *  (e.g. <code>Settings.DELAYED_BRANCHING_ENABLED</code>)
-   		*/
-
+   	* Establish setting for whether delayed branching will be applied during 
+   	* MIPS program execution.  If enabled, the statement following a successful
+   	* branch will be executed and then the branch is taken!  This simulates
+   	* pipelining and all MIPS processors do it.  However it is confusing to
+   	* assembly language students so is disabled by default.  SPIM does same thing.
+   	* @param value True to enable delayed branching, false otherwise.
+   	*  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
+   	*  (e.g. <code>Settings.DELAYED_BRANCHING_ENABLED</code>)
+   	*/
+	@Deprecated
 	public void setDelayedBranchingEnabled(boolean value) {
 		internalSetBooleanSetting(DELAYED_BRANCHING_ENABLED, value);
 	}
@@ -881,6 +903,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.EDITOR_LINE_NUMBERS_DISPLAYED</code>)
    	 */
+	@Deprecated
 	public void setEditorLineNumbersDisplayed(boolean value) {
 		internalSetBooleanSetting(EDITOR_LINE_NUMBERS_DISPLAYED, value);
 	}
@@ -891,6 +914,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.WARNINGS_ARE_ERRORS</code>)
    	 */
+	@Deprecated
 	public void setWarningsAreErrors(boolean value) {
 		internalSetBooleanSetting(WARNINGS_ARE_ERRORS, value);
 	}
@@ -901,6 +925,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.PROGRAM_ARGUMENTS</code>)
    	 */
+	@Deprecated
 	public void setProgramArguments(boolean value) {
 		internalSetBooleanSetting(PROGRAM_ARGUMENTS, value);
 	}
@@ -912,6 +937,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.DATA_SEGMENT_HIGHLIGHTING</code>)
    	 */
+	@Deprecated
 	public void setDataSegmentHighlighting(boolean value) {
 		internalSetBooleanSetting(DATA_SEGMENT_HIGHLIGHTING, value);
 	}
@@ -923,6 +949,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.REGISTERS_HIGHLIGHTING</code>)
    	 */
+	@Deprecated
 	public void setRegistersHighlighting(boolean value) {
 		internalSetBooleanSetting(REGISTERS_HIGHLIGHTING, value);
 	}
@@ -934,6 +961,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>setBooleanSetting(int id, boolean value)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.START_AT_MAIN</code>)
    	 */
+	@Deprecated
 	public void setStartAtMain(boolean value) {
 		internalSetBooleanSetting(START_AT_MAIN, value);
 	}
@@ -962,6 +990,7 @@ public class Settings extends Observable {
    	 *  @deprecated Use <code>setBooleanSettingNonPersistent(int id, boolean value)</code> with the appropriate boolean setting ID
    	 *  (e.g. <code>Settings.DELAYED_BRANCHING_ENABLED</code>)
    	 */
+	@Deprecated
 	public void setDelayedBranchingEnabledNonPersistent(boolean value) {
 		// Note: Doing assignment to array results in non-persistent
 		// setting (lost when MARS terminates).  For persistent, use

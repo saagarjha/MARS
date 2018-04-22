@@ -71,7 +71,7 @@ public class MessagesPane extends JTabbedPane {
 		// pane, will make messages more readable.  For run
 		// pane, will allow properly aligned "text graphics"
 		// DPS 15 Dec 2008
-		Font monoFont = new Font(Font.MONOSPACED, Font.PLAIN, 12);
+		Font monoFont = Globals.getSettings().getEditorFont();
 		assemble.setFont(monoFont);
 		run.setFont(monoFont);
 
@@ -84,7 +84,7 @@ public class MessagesPane extends JTabbedPane {
 			    }
 		    });
 		assembleTab = new JPanel(new BorderLayout());
-		assembleTab.add(createBoxForButton(assembleTabClearButton), BorderLayout.WEST);
+		assembleTab.add(createBoxForButton(assembleTabClearButton), BorderLayout.EAST);
 		assembleTab.add(new JScrollPane(assemble, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 		                                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
 		                BorderLayout.CENTER);
@@ -371,7 +371,7 @@ public class MessagesPane extends JTabbedPane {
 
 	////////////////////////////////////////////////////////////////////////////
 	// Thread class for obtaining user input in the Run I/O window (MessagesPane)
-	// Written by Ricardo Fern·ndez Pascual [rfernandez@ditec.um.es] December 2009.
+	// Written by Ricardo Fern√°ndez Pascual [rfernandez@ditec.um.es] December 2009.
 	class Asker implements Runnable {
 		ArrayBlockingQueue<String> resultQueue = new ArrayBlockingQueue<String>(1);
 		int initialPos;
