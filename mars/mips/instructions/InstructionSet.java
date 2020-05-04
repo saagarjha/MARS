@@ -1,11 +1,11 @@
 package mars.mips.instructions;
-import mars.simulator.*;
+import java.io.*;
+import java.util.*;
+import mars.*;
 import mars.mips.hardware.*;
 import mars.mips.instructions.syscalls.*;
-import mars.*;
+import mars.simulator.*;
 import mars.util.*;
-import java.util.*;
-import java.io.*;
 
 /*
 Copyright (c) 2003-2013,  Pete Sanderson and Kenneth Vollmar
@@ -760,8 +760,8 @@ public class InstructionSet {
 		                         new SimulationCode() {
 			                         public void simulate(ProgramStatement statement) throws ProcessingException {
 				                         int[] operands = statement.getOperands();
+				                         processReturnAddress(31);                      //RegisterFile.updateRegister("$ra",RegisterFile.getProgramCounter());
 				                         if (RegisterFile.getValue(operands[0]) >= 0) { // the "and link" part
-					                         processReturnAddress(31);                  //RegisterFile.updateRegister("$ra",RegisterFile.getProgramCounter());
 					                         processBranch(operands[1]);
 				                         }
 			                         }
@@ -813,8 +813,8 @@ public class InstructionSet {
 		                         new SimulationCode() {
 			                         public void simulate(ProgramStatement statement) throws ProcessingException {
 				                         int[] operands = statement.getOperands();
+				                         processReturnAddress(31);                     //RegisterFile.updateRegister("$ra",RegisterFile.getProgramCounter());
 				                         if (RegisterFile.getValue(operands[0]) < 0) { // the "and link" part
-					                         processReturnAddress(31);                 //RegisterFile.updateRegister("$ra",RegisterFile.getProgramCounter());
 					                         processBranch(operands[1]);
 				                         }
 			                         }
